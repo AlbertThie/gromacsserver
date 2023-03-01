@@ -13,14 +13,19 @@ class Calculation():
     def getId(self):
         return self.id
 
-    def saveFiles(self,f):
+    def saveFiles(self,f,name):
 
         self.directory = os.getcwd()+'/Calculations/' + str(self.id)+'/'
         try:
             os.makedirs(self.directory)
         except OSError:
             pass
-        f.save(os.path.join(self.directory , secure_filename(f.filename)))
+        if isinstance(f, str):
+            text_file = open(name, "w")
+            text_file.write(f)
+            text_file.close()
+        else:
+            f.save(os.path.join(self.directory , secure_filename(f.filename)))
         return self.directory
 
     def getDirectory(self):
