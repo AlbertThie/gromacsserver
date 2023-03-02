@@ -1,4 +1,3 @@
-import shutil
 import os
 from GromacsProcess import GromacsProcess
 
@@ -6,27 +5,12 @@ from GromacsProcess import GromacsProcess
 
 
 class Pdb2gmx(GromacsProcess):
-    def __init__(self,input_list,output_list):
-        self.command = "pdb2gmx"
-        self.input_list = input_list
-        self.output_list = output_list
-        self.inputString = []
-        self.arguments= {"-f": input_list,"-o": output_list}
+    def __init__(self,arguments):
         self.process = None
-
-    def setWater(self,value):
-        self.arguments["-water"] = value
-
-    def getWater(self):
-        return self.arguments["-water"]
-
-
-    def setForceField(self,value):
-        self.arguments["-ff"] = value
-
-
-    def getForceField(self):
-        return self.arguments["-ff"]
+        self.command = "pdb2gmx"
+        self.inputString = []
+        self.arguments = arguments
+        self.process = None
 
 
 """
