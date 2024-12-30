@@ -2,8 +2,8 @@
 Server/Calculations/*
 Server/__pycache__
 out.txt
-instance/flaskr.sqlite
 Server/.DS_Store
-Server/schema.sql
 Server/Calculations/.DS_Store
 *.pyc
+Calculations/*/
+
