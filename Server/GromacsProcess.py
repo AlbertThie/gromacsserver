@@ -14,6 +14,7 @@ class GromacsProcess:
     def createInputString(self):
         inputString = [str(self.command)]
         for k, v in self.arguments.items():
+            print("GromacsProcess is doing :"  + (str(k) + "   " +str(v)))
             inputString = inputString + self.createString(k,v)
 
         self.inputString = inputString

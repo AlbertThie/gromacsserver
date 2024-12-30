@@ -1,5 +1,5 @@
 import os
-from GromacsProcess import GromacsProcess
+from .GromacsProcess import GromacsProcess
 
 
 class EditConf(GromacsProcess):
