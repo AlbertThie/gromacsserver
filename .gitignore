@@ -7,3 +7,4 @@ Server/Calculations/.DS_Store
 *.pyc
 Calculations/*/
 
+.DS_Store

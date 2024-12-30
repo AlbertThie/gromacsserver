@@ -176,9 +176,8 @@ def create_app(test_config=None):
                     print("it works though")
                     submission = Submission(json.loads(parameters['json']))
                     Calculation.calculations[submission.getCalculation().getId()] = submission.getCalculation()
-                    directory = calculation.saveFiles(parameters['file'],json.loads(parameters['json'])['-f'])
-                    submission.getGromacsCommand().createInputString()
-                    process = subprocess.Popen(["gmx"] + submission.getGromacsCommand().getInputString(),cwd=directory)
+                    directory = submission.getCalculation().saveFiles(parameters['file'],json.loads(parameters['json'])['-f'])
+                    process = subprocess.Popen(["gmx"] + submission.getCalculationType().getInputString(),cwd=directory)
                     
                     resp = Response(response="", status=200,  mimetype="text/plain")
                     resp.headers['Qchemserv-Status'] = "OK"
@@ -186,7 +185,6 @@ def create_app(test_config=None):
 
                     return resp
 
-                    submission.getCalculation().getId()
 
 
 

@@ -6,8 +6,11 @@ from .EditConf import EditConf
 class Submission:
     def __init__(self,request):
         self.request = request
+        print(f"Request is {request}")
         self.calculation = Calculation()
-        self.gromacsCommand = getCalculationType()
+        if(self.request["jobType"] =="EditConf"):
+            self.gromacsCommand = "editconf"
+            self.calc_process = EditConf(request)
 
 
     def getCalculation(self):
@@ -17,7 +20,5 @@ class Submission:
         return self.gromacsCommand
         
     def getCalculationType(self):
-        if(self.request["jobType"] =="EditConf"):
-            return EditConf(json.loads(editconfparameters['json']))
-
+        return self.calc_process
 
