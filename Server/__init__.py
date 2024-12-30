@@ -167,7 +167,7 @@ def create_app(test_config=None):
                 ).fetchone()
                 print(user)
                 if user is None:
-                    error = 'Incorrect username.'
+                    error = f'No user: {username}'
                 else:
 
                     parameters = dict(request.form)
