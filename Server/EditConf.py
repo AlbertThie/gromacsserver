@@ -8,12 +8,13 @@ class EditConf(GromacsProcess):
         self.command = "editconf"
         self.inputString = []
         self.arguments = arguments
-        self.process = None
 
     def createInputString(self):
         inputString = [str(self.command)]
         for k, v in self.arguments.items():
-            if k == "boundary":
+            if k =="jobType":
+                pass
+            elif k == "boundary":
                 inputString = inputString + self.createString("-d",str(v))
             elif k == "boxType":
                 inputString = inputString + self.createString("-bt",v)
@@ -21,5 +22,6 @@ class EditConf(GromacsProcess):
                 inputString = inputString + self.createString("-c","True")
             else:
                 inputString = inputString + self.createString(k,v)
-
+        print(f"input string is {inputString}")
         self.inputString = inputString
+    

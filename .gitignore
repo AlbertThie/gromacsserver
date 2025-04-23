@@ -1,10 +1,10 @@
 .DS_Store
-Server/Calculations/*
+Server/Calculations
 Server/__pycache__
 out.txt
 Server/.DS_Store
 Server/Calculations/.DS_Store
 *.pyc
-Calculations/*/
+Calculations
 
 .DS_Store

@@ -177,11 +177,14 @@ def create_app(test_config=None):
                     submission = Submission(json.loads(parameters['json']))
                     Calculation.calculations[submission.getCalculation().getId()] = submission.getCalculation()
                     directory = submission.getCalculation().saveFiles(parameters['file'],json.loads(parameters['json'])['-f'])
+                    submission.getCalculationType().createInputString()
+                    print(submission.getCalculationType().getInputString())
                     process = subprocess.Popen(["gmx"] + submission.getCalculationType().getInputString(),cwd=directory)
                     
                     resp = Response(response="", status=200,  mimetype="text/plain")
                     resp.headers['Qchemserv-Status'] = "OK"
-                    resp.headers['Qchemserv-Jobid'] = username
+                    resp.headers['Qchemserv-Jobstatus'] = "QUEUED"
+                    resp.headers['Qchemserv-Jobid'] = submission.getCalculation().getId()
 
                     return resp
 
@@ -193,10 +196,27 @@ def create_app(test_config=None):
 
         return {"error": error}, 415
 
+#server.c serverconfiguration.c
+    @app.get("/list")
+    def get_list():
+        pass
+
+    @app.get("/status")
+    def get_status():
+        print("returing status")
+        jobid = request.args.get('jobid')
+        if jobid in Calculation.calculations:
+            calc = Calculation.calculations[jobid]
+            resp = Response(response="", status=200,  mimetype="text/plain")
+            resp.headers['Qchemserv-Status'] = "OK"
+            resp.headers['Qchemserv-Jobstatus'] = "QUEUED"
+            resp.headers['Qchemserv-Jobid'] = jobid
+            return resp
 
 
 
-
+        else:   
+            print( f"job id {jobid} not found")
 
     @app.post("/solvate")
     def do_solvate():

@@ -7,9 +7,9 @@ from werkzeug.utils import secure_filename
 class Calculation():
     calculations = {}
     newid = itertools.count()
-    def __init__(self):
+    def __init__(self,process):
         self.id = uuid.uuid4().hex
-
+        self.process =process
 
     def getId(self):
         return self.id
